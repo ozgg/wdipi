@@ -61,6 +61,58 @@
       }
     })
   </script>
+  <style>
+      .widget {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          gap: .5rem;
+          width: 30ch;
+      }
+
+      label {
+          display: inline-block;
+          padding: .875rem 0 0 0;
+          position: relative;
+          width: 100%;
+
+          span {
+              top: .625rem;
+              font-size: .75rem;
+              left: .25rem;
+              line-height: 1;
+              opacity: 0;
+              pointer-events: none;
+              position: absolute;
+              transition: .25s;
+          }
+      }
+
+      input {
+          font: inherit;
+          width: 100%;
+      }
+
+      button {
+          margin-top: 1rem;
+          transition: .25s;
+          width: 30ch;
+      }
+
+      label:not(:has(:placeholder-shown)) span {
+          opacity: 1;
+          top: .125rem;
+      }
+
+      label:has([name="item"]:placeholder-shown) ~ button {
+          opacity: 0;
+          pointer-events: none;
+      }
+
+      section {
+          max-width: 60ch;
+      }
+  </style>
 </head>
 <body>
 <header>
@@ -71,10 +123,17 @@
     <header>
       <h2>Items and places</h2>
     </header>
+    <p>
+      Put&nbsp;something into&nbsp;a&nbsp;"reliable place" and&nbsp;forgot where
+      to&nbsp;again?<br/>
+      Not&nbsp;anymore. Use this simple widget when you put&nbsp;something
+      somewhere to&nbsp;memorize and&nbsp;recollect its&nbsp;location.
+    </p>
+
     <div class="widget">
       <label>
         <span>Item</span>
-        <input name="item" list="items" placeholder="Item"/>
+        <input autocomplete="off" name="item" list="items" placeholder="Item"/>
       </label>
       <label>
         <span>Place</span>
@@ -84,14 +143,90 @@
     </div>
 
     <datalist id="items"></datalist>
+
+    <h3>Memorizing items</h3>
+    <ol>
+      <li>Fill in "item" field.</li>
+      <li>Fill in "place" field.</li>
+      <li>Press "Apply" button.</li>
+    </ol>
+
+    <p>
+      All items are stored locally in your device using local storage. All saved
+      items are added to list so you can select them later (drop-down
+      for "item" field).
+    </p>
+
+    <h3>Recollecting places</h3>
+    <ol>
+      <li>Select item from drop-down list in "item" field.</li>
+      <li>Saved place should appear in "place" field.</li>
+      <li>Edit "place" field and press "apply" if you need to change place for that item.</li>
+    </ol>
+
+    <h3>Removing items from list</h3>
+    <ol>
+      <li>Select item from drop-down list in "item" field.</li>
+      <li>Leave "place" field blank.</li>
+      <li>Press "Apply" button.</li>
+    </ol>
   </section>
 
   <section>
     <h2>About</h2>
+
+    <p>
+      I created this project because I kept forgetting where I put different
+      items that I can need in distant future. Even when one says "remember:
+      I put this over there", when time passes, it can be hard to recollect
+      where exactly "over there" is.
+    </p>
+    <p>
+      Wouldn't it be nice to have a lightweight tool that server the only purpose:
+      memorizing and recollecting for you what you put and where? Now such tool
+      exists (it may or may not have existed previously, I didn't check).
+    </p>
+    <p>
+      You can send it to home screen of your device to have qiuck access when
+      you need it.
+    </p>
+  </section>
+
+  <section>
+    <h2>Disclaimer</h2>
+
+    <p>
+      This site is provided "as is" widhout any explicit or implicit
+      warranty that information is saved and can be received in the future.
+    </p>
+    <p>
+      It uses localStorage feature of browsers to store the list of items
+      locally on your device and, as a result, any third party component
+      is subject to change without any notice.
+    </p>
+    <p>
+      Make sure that you have another copy of your item/location mapping
+      elsewhere if it is really critical for you to recollect the locations.
+      Better safe than sorry.
+    </p>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+
+    <p>
+      This site does not use any cookies or other technology to track you.
+      The only thing used is localStorage that keeps list of item/location
+      mapping. This list is not sent anywhere and is stored only on your device.
+    </p>
   </section>
 </main>
 <footer>
   <p class="copyright"><small>&copy; 2026 Maxim Khan-Magomedov</small></p>
+  <div class="technical">
+    <p>Version: 1.0.0a</p>
+    <p>Github: <a href="https://github.com/ozgg/wdipi" rel="external">ozgg/wdipi</a>.</p>
+  </div>
 </footer>
 </body>
 </html>
