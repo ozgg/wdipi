@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Where Did I Put It?</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="application-name" content="WDIPI"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const widget = document.querySelector('.widget')
+      let items
+      if (localStorage.key('items')) {
+        items = new Map(JSON.parse(localStorage.getItem('items')))
+      } else {
+        items = new Map()
+      }
+
+      const populate = (list) => {
+        list.innerHTML = ''
+        items.keys().forEach((item) => {
+          const option = document.createElement('option')
+          option.value = item
+          list.appendChild(option)
+        })
+      }
+
+      const putItem = (item, place) => {
+        if (place) {
+          items.set(item, place)
+        } else {
+          items.delete(item)
+        }
+        localStorage.setItem('items', JSON.stringify(Array.from(items.entries())))
+      }
+
+      if (widget) {
+        const applyButton = widget.querySelector('button.apply')
+        const itemField = widget.querySelector('input[name="item"]')
+        const placeField = widget.querySelector('input[name="place"]')
+        const list = document.getElementById('items')
+        populate(list)
+
+        itemField.addEventListener('input', e => {
+          if (items.has(itemField.value)) {
+            placeField.value = items.get(itemField.value)
+          } else {
+            placeField.value = ''
+          }
+        })
+
+        applyButton.addEventListener('click', () => {
+          if (itemField.value) {
+            putItem(itemField.value, placeField.value)
+            populate(list)
+          }
+          itemField.value = ''
+          placeField.value = ''
+        })
+      }
+    })
+  </script>
+</head>
+<body>
+<header>
+  <h1>Where Did I Put It?</h1>
+</header>
+<main>
+  <section>
+    <header>
+      <h2>Items and places</h2>
+    </header>
+    <div class="widget">
+      <label>
+        <span>Item</span>
+        <input name="item" list="items" placeholder="Item"/>
+      </label>
+      <label>
+        <span>Place</span>
+        <input name="place" placeholder="Place"/>
+      </label>
+      <button type="button" class="apply">Apply</button>
+    </div>
+
+    <datalist id="items"></datalist>
+  </section>
+
+  <section>
+    <h2>About</h2>
+  </section>
+</main>
+<footer>
+  <p class="copyright"><small>&copy; 2026 Maxim Khan-Magomedov</small></p>
+</footer>
+</body>
+</html>
