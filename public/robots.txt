@@ -1,0 +1,4 @@
+Host: wheredidiputit.site
+
+User-agent: *
+Allow: /
