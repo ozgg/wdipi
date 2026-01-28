@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>List of my items</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let items
+      if (localStorage.key('items')) {
+        items = new Map(JSON.parse(localStorage.getItem('items')))
+      } else {
+        items = new Map()
+      }
+      const list = document.getElementById('items')
+      items.forEach((place, item) => {
+        const tr = document.createElement('tr')
+        const th = document.createElement('th')
+        const td = document.createElement('td')
+        th.innerHTML = item
+        td.innerHTML = place
+        tr.appendChild(th)
+        tr.appendChild(td)
+        list.appendChild(tr)
+      })
+    })
+  </script>
+</head>
+<body>
+<h1>List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Item</th>
+    <th>Place</th>
+  </tr>
+  </thead>
+  <tbody id="items"></tbody>
+</table>
+</body>
+</html>
