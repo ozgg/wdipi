@@ -2,3 +2,4 @@ Host: wheredidiputit.site
 
 User-agent: *
 Allow: /
+Disallow: /list.html  # Item list is formed dynamically from localStorage
