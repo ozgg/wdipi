@@ -63,12 +63,41 @@
     })
   </script>
   <style>
+      /** { outline: solid pink 1px }*/
+      *, *:before, *:after {
+          box-sizing: border-box;
+      }
+      :root {
+          --spacer-xxs: .25rem;
+          --spacer-xs: .5rem;
+          --spacer-s: 1rem;
+          --spacer-m: 1.5rem;
+
+          --font-size-normal: 1rem;
+
+          --form-input-bg: #fff;
+
+          --input-border: hsl(0, 0%, 75%);
+          --input-border-focus: hsl(0, 0%, 50%);
+          --input-border-invalid: hsl(0, 75%, 50%);
+          --input-border-invalid-focus: hsl(0, 50%, 50%);
+          --button-save-bg: hsl(120, 25%, 55%);
+          --button-save-bg-hover: hsl(120, 25%, 25%);
+          --button-save-color: #fff;
+          --button-save-color-hover: #fff;
+      }
+
+      body {
+          max-width: 80ch;
+      }
+
       .widget {
           align-items: center;
           display: flex;
           flex-direction: column;
           gap: .5rem;
-          width: 30ch;
+          margin-inline: auto;
+          max-width: 30ch;
       }
 
       label {
@@ -95,9 +124,9 @@
       }
 
       button {
-          margin-top: 1rem;
+          margin-block-start: 1rem;
           transition: .25s;
-          width: 30ch;
+          max-width: 20ch;
       }
 
       label:not(:has(:placeholder-shown)) span {
@@ -106,7 +135,7 @@
       }
 
       label:has([name="item"]:placeholder-shown) ~ button {
-          opacity: 0;
+          filter: grayscale(100%);
           pointer-events: none;
       }
 
@@ -116,6 +145,72 @@
 
       .technical {
           font-size: .75rem;
+          margin-inline-start: auto;
+      }
+
+       input {
+           background-color: var(--form-input-bg);
+           border: .0625rem solid var(--input-border);
+           border-radius: var(--spacer-xxs);
+           font-size: var(--font-size-normal);
+           margin: 0;
+           padding: var(--spacer-xxs) var(--spacer-xs);
+
+           &:focus {
+               border-color: var(--input-border-focus);
+               box-shadow: .0625rem .0625rem .125rem var(--input-border-focus);
+               outline: none;
+           }
+       }
+
+      button {
+          border: .0625rem solid;
+          border-radius: .25rem;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: inherit;
+          display: inline-block;
+          margin: 0;
+          padding: var(--spacer-xxs) var(--spacer-xs);
+          text-align: center;
+          text-decoration: none;
+          transition: .25s;
+
+          &:focus,
+          &:hover {
+              text-decoration: none;
+          }
+
+          &:disabled {
+              cursor: default;
+              filter: grayscale(.75);
+              opacity: .75;
+          }
+      }
+
+      .apply {
+          background: var(--button-save-bg);
+          border-color: var(--button-save-bg);
+          color: var(--button-save-color);
+
+          &:focus,
+          &:hover {
+              background: var(--button-save-bg-hover);
+              color: var(--button-save-color-hover);
+          }
+      }
+
+      footer {
+          border-block-start: .0125rem solid var(--input-border);
+          display: flex;
+          gap: var(--spacer-xs);
+          flex-wrap: wrap;
+          margin-block-start: var(--spacer-m);
+          padding-block: var(--spacer-xxs);
+
+          p:first-of-type {
+              margin-block-start: 0;
+          }
       }
   </style>
 </head>
