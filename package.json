@@ -1,0 +1,36 @@
+{
+  "name": "wdipi",
+  "version": "1.0.0",
+  "description": "Where Did I Put It?",
+  "homepage": "https://github.com/ozgg/wdipi#readme",
+  "bugs": {
+    "url": "https://github.com/ozgg/wdipi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozgg/wdipi.git"
+  },
+  "license": "ISC",
+  "author": "Maxim Khan-Magomedov",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server/main.ts",
+    "build": "vite build && tsc",
+    "start": "node dist/server/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.2.1",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  }
+}

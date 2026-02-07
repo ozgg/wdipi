@@ -16,8 +16,9 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       let items
-      if (localStorage.key('items')) {
-        items = new Map(JSON.parse(localStorage.getItem('items')))
+      const storedItems = localStorage.getItem('items')
+      if (storedItems !== null) {
+        items = new Map(JSON.parse(storedItems))
       } else {
         items = new Map()
       }
