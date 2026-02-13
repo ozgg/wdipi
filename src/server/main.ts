@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import indexRouter from "../routes/index.js";
+import listRouter from "../routes/list.js";
 
 async function bootstrap() {
   const app = express();
@@ -19,6 +20,7 @@ async function bootstrap() {
   app.use(vite.middlewares)
   app.use(express.static(path.resolve(process.cwd(), 'public')))
   app.use('/', indexRouter);
+  app.use('/list', listRouter);
 
   app.listen(PORT, () => {
     console.log(`🚀 Server: http://localhost:${PORT}`);
